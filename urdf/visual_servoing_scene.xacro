@@ -1,0 +1,124 @@
+<?xml version="1.0" ?>
+<robot name="kuka_lbr_iiwa_14_r820" xmlns:xacro="http://wiki.ros.org/xacro">
+    <xacro:include filename="$(find kuka_lbr_iiwa_support)/urdf/lbr_iiwa_14_r820_macro.xacro"/>
+    <xacro:kuka_lbr_iiwa_14_r820 prefix=""/>
+    <material name="light_grey">
+       <color rgba="0.2 0.2 0.2 1"/>
+    </material>
+
+    <link name="Operation_bed">
+        <visual>
+            <origin xyz="0 0 0" rpy="1.57079632679 0 0"/>
+            <geometry>
+                <mesh filename="package://visual_servoing/meshes/Table_N300116.3ds.obj" scale="0.1 0.1 0.1"/>
+            </geometry>
+        </visual>
+    </link>
+    <link name="robot_base">
+        <visual>
+            <origin xyz="0 0 0.75" rpy="0 0 0"/>
+            <geometry>
+                <cylinder length="1.5" radius="0.15"/>
+            </geometry>
+            <material name="light_grey"/>
+        </visual>
+        <collision>
+            <origin xyz="0 0 0.75" rpy="0 0 0"/>
+            <geometry>
+                <cylinder length="1.5" radius="0.15"/>
+            </geometry>
+        </collision>
+
+    </link>
+    <link name="Patient">
+        <visual>
+            <origin xyz="-0.2 -0.3 0" rpy="1.57079632679 0 0.2"/>
+            <geometry>
+                <mesh filename="package://visual_servoing/meshes/Man_Beach_N240414.3ds.obj" scale="0.035 0.035 0.035"/>
+            </geometry>
+        </visual>
+    </link>
+    <link name="Markers_frame">
+    </link>
+    <link name="Red_marker">
+        <visual>
+            <geometry>
+                <sphere radius="0.05"/>
+            </geometry>
+            <material name="Red">
+                <color rgba="1 0 0 1"/>
+            </material>
+        </visual>
+    </link>
+    <link name="Green_marker">
+        <visual>
+            <geometry>
+                <sphere radius="0.05"/>
+            </geometry>
+            <material name="Green">
+                <color rgba="0 1 0 1"/>
+            </material>
+        </visual>
+    </link>
+    <link name="Blue_marker">
+        <visual>
+            <geometry>
+                <sphere radius="0.05"/>
+            </geometry>
+            <material name="Blue">
+                <color rgba="0 0 1 1"/>
+            </material>
+        </visual>
+    </link>
+    <link name="Yellow_marker">
+        <visual>
+            <geometry>
+                <sphere radius="0.05"/>
+            </geometry>
+            <material name="Yellow">
+                <color rgba="1 0 1 1"/>
+            </material>
+        </visual>
+    </link>
+    <joint name="Operation_bed2Patient" type="fixed">
+        <origin xyz="0.2 0.7 1.25" rpy="0 0 0"/>
+        <parent link="Operation_bed"/>
+        <child link="Patient"/>
+    </joint>
+    <joint name="Operation_bed2robot_base" type="fixed">
+        <origin xyz="-0.2 -1.6 0" rpy="0 0 0"/>
+        <parent link="Operation_bed"/>
+        <child link="robot_base"/>
+    </joint>
+        <joint name="robot_base2base_link" type="fixed">
+        <origin xyz="0 0 1.5" rpy="0 0 0"/>
+        <parent link="robot_base"/>
+        <child link="base_link"/>
+    </joint>
+    <joint name="Operation_bed2Markers_frame" type="fixed">
+        <origin xyz="-0.4 -0.7 1.75" rpy="${1.57079632679/2} 0 0"/>
+        <parent link="Operation_bed"/>
+        <child link="Markers_frame"/>
+    </joint>
+    <joint name="Markers_frame2Red_marker" type="fixed">
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <parent link="Markers_frame"/>
+        <child link="Red_marker"/>
+    </joint>
+    <joint name="Markers_frame2Green_marker" type="fixed">
+        <origin xyz="0.3 0 0" rpy="0 0 0"/>
+        <parent link="Markers_frame"/>
+        <child link="Green_marker"/>
+    </joint>
+    <joint name="Markers_frame2Blue_marker" type="fixed">
+        <origin xyz="0.3 0.3 0" rpy="0 0 0"/>
+        <parent link="Markers_frame"/>
+        <child link="Blue_marker"/>
+    </joint>
+    <joint name="Markers_frame2Yellow_marker" type="fixed">
+        <origin xyz="0 0.3 0" rpy="0 0 0"/>
+        <parent link="Markers_frame"/>
+        <child link="Yellow_marker"/>
+    </joint>
+
+</robot>

@@ -1,0 +1,28 @@
+<launch>
+  <include file="$(find visual_servoing)/launch/visual_servoing_load.launch" />
+  <param name="simulation" type="boolean" value="true" />
+  <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" />
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find visual_servoing)/config/robot_state_visualize.rviz" required="true" />
+  <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher"> 
+    <param name="use_gui" value="false" />
+     <rosparam param="/source_list">[joint_states_cmd]</rosparam>
+  </node>
+  <!-- node name="relay_my_robot_arm_joint_cmd2Joint_telem" pkg="topic_tools" type="relay" args="/my_robot_arm/joint_cmd /my_robot_arm/joint_telem"/-->
+  <group ns="camera2">
+  <node pkg="tf" type="static_transform_publisher" name="camera_broadcaster"
+      args="0 0 0 0 0 0 1 tool0 camera2 10" />
+
+  <node name="camera_info" pkg="rostopic" type="rostopic"
+      args="pub camera_info sensor_msgs/CameraInfo
+     '{header: {seq: 0, stamp: {secs: 0, nsecs: 0}, frame_id: 'camera2'},
+      height: 720, width: 1280, distortion_model: 'plumb_bob',
+      D: [0],
+      K: [300.0, 0.0, 640, 0.0, 300.0, 360.0, 0.0, 0.0, 1.0],
+      R: [1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0],
+      P: [300.0, 0.0, 640, 0.0, 0.0, 300, 360, 0.0, 0.0, 0.0, 1.0, 0.0],
+      binning_x: 0, binning_y: 0,
+      roi: {x_offset: 0, y_offset: 0, height: 720, width: 1280, do_rectify: false}}' -r 2"
+      output="screen"/>
+  </group>
+</launch>
+
