@@ -14,7 +14,7 @@ $ roslaunch visual_servoing visual_servoing.launch
 ```
 
 An RViz window similar to this one should appears.
-![](./rviz.png)
+![](rviz.png)
 
 If you want to move the arm manually be sure to enable the param
 ```xml
