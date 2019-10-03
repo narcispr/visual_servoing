@@ -4,7 +4,7 @@
   <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" />
   <node name="rviz" pkg="rviz" type="rviz" args="-d $(find visual_servoing)/config/robot_state_visualize.rviz" required="true" />
   <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher"> 
-    <param name="use_gui" value="true" />
+    <param name="use_gui" value="false" />
      <rosparam param="/source_list">[joint_states_cmd]</rosparam>
   </node>
   <!-- node name="relay_my_robot_arm_joint_cmd2Joint_telem" pkg="topic_tools" type="relay" args="/my_robot_arm/joint_cmd /my_robot_arm/joint_telem"/-->
