@@ -38,8 +38,12 @@
             </geometry>
         </visual>
     </link>
+
+
     <link name="Markers_frame">
     </link>
+
+
     <link name="Red_marker">
         <visual>
             <geometry>
@@ -121,4 +125,17 @@
         <child link="Yellow_marker"/>
     </joint>
 
+     <link name="ArucoMarker">
+        <visual>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+            <geometry>
+                <mesh filename="package://visual_servoing/meshes/marker2.dae" scale="1 1 1"/>
+            </geometry>
+        </visual>
+    </link>
+    <joint name="Markers_frame2ARUCO" type="fixed">
+        <origin xyz="0.3 0.3 0.3" rpy="-2.356 0 0"/>
+        <parent link="Markers_frame"/>
+        <child link="ArucoMarker"/>
+    </joint>
 </robot>
